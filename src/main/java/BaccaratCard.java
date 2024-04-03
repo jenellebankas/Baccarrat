@@ -4,7 +4,6 @@ public class BaccaratCard extends Card {
 
   public BaccaratCard(Rank r, Suit s) {
     super(r, s);
-
   }
 
   public Rank getRank() {
