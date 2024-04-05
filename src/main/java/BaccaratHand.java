@@ -1,39 +1,57 @@
-// TODO: Implement the BaccaratHand class in the file
-
-import java.util.LinkedList;
-import java.util.List;
-
-
 
 public class BaccaratHand extends CardCollection {
 
-  private final List<BaccaratCard> hand;
+
   public BaccaratHand() {
-    hand = new LinkedList<>();
+
   }
 
   public int size() {
-    return hand.size();
+    return super.size();
   }
 
-  public void add(BaccaratCard card) {
-    hand.add(card);
+  public void add(Card card) {
+    super.add(card);
   }
 
-  public int value() {
-    return 0;
+  @Override public int value() {
+
+    int total = 0;
+
+    for(Card card: cards) {
+      total += card.value();
+    }
+
+    if (total > 10) {
+      total = total % 10;
+    }
+
+    return total;
+
   }
 
   public boolean isNatural() {
-    return false;
+    return size() == 2 && (value() == 8 || value() == 9);
   }
 
   @Override
   public String toString() {
-    return String.format("%s%s %s%s",
-      hand.get(0).getRank(),
-      hand.get(0).getSuit(),
-      hand.get(1).getRank(),
-      hand.get(1).getSuit());
+
+    int i = 1;
+
+    StringBuilder builder = new StringBuilder();
+
+    for(Card card: cards) {
+
+      i++;
+
+      builder.append(card.toString());
+
+      if (i == cards.size()) {
+        builder.append(' ');
+      }
+    }
+
+    return String.format("%s", builder);
   }
 }

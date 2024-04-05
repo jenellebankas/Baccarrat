@@ -1,37 +1,39 @@
 
-
 public class BaccaratCard extends Card {
-
-  private final Rank rank;
-  private final Suit suit;
 
   public BaccaratCard(Rank r, Suit s) {
    super(r, s);
-   this.rank = r;
-   this.suit = s;
   }
 
   public Rank getRank() {
-    return rank;
+    return super.getRank();
   }
 
   public Suit getSuit() {
-    return suit;
+    return super.getSuit();
   }
 
   @Override public String toString() {
-    return String.format("%s%s", rank, suit);
+    return String.format("%s", super.toString());
   }
 
-  public boolean equals(Object other) {
-    return false;
+  @Override public boolean equals(Object other) {
+    return super.equals(other);
   }
 
-  public int compareTo(Card other) {
-    return 0;
+  @Override public int compareTo(Card other) {
+    return super.compareTo(other);
+
   }
 
-  public int value() {
-    return 0;
+    public int value() {
+
+    int tempValue = super.value();
+    if (tempValue >= 10) {
+      tempValue = tempValue % 10;
+    }
+
+    return tempValue;
+
   }
 }
