@@ -1,16 +1,23 @@
 // TODO: Implement the BaccaratHand class in the file
 
-public class BaccaratHand extends CardCollection{
-  public BaccaratHand() {
+import java.util.LinkedList;
+import java.util.List;
 
+
+
+public class BaccaratHand extends CardCollection {
+
+  private final List<BaccaratCard> hand;
+  public BaccaratHand() {
+    hand = new LinkedList<>();
   }
 
   public int size() {
-    return 0;
+    return hand.size();
   }
 
-  public void add(Card card) {
-
+  public void add(BaccaratCard card) {
+    hand.add(card);
   }
 
   public int value() {
@@ -23,6 +30,10 @@ public class BaccaratHand extends CardCollection{
 
   @Override
   public String toString() {
-    return null;
+    return String.format("%s%s %s%s",
+      hand.get(0).getRank(),
+      hand.get(0).getSuit(),
+      hand.get(1).getRank(),
+      hand.get(1).getSuit());
   }
 }

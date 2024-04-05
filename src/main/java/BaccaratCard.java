@@ -1,21 +1,26 @@
-// TODO: Implement the BaccaratCard class in this file
+
 
 public class BaccaratCard extends Card {
 
+  private final Rank rank;
+  private final Suit suit;
+
   public BaccaratCard(Rank r, Suit s) {
-    super(r, s);
+   super(r, s);
+   this.rank = r;
+   this.suit = s;
   }
 
   public Rank getRank() {
-    return null;
+    return rank;
   }
 
   public Suit getSuit() {
-    return null;
+    return suit;
   }
 
   @Override public String toString() {
-    return null;
+    return String.format("%s%s", rank, suit);
   }
 
   public boolean equals(Object other) {

@@ -1,6 +1,6 @@
 // TODO: Implement the Shoe class in this file
 
-public class Shoe extends CardCollection{
+public class Shoe extends CardCollection {
 
   public Shoe(int decks) throws CardException {
     if (decks != 6 || decks != 8) {
