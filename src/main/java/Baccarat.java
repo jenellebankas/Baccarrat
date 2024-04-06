@@ -7,47 +7,58 @@ public class Baccarat {
   private int playerWins = 0;
   private int numTies = 0;
 
-  public final BaccaratHand punto = new BaccaratHand();
-  public final BaccaratHand banco = new BaccaratHand();
-  public final Shoe shoe = new Shoe(6);
+  private final BaccaratHand punto = new BaccaratHand();
+  private final BaccaratHand banco = new BaccaratHand();
+  private final Shoe shoe = new Shoe(6);
   public Baccarat() {
 
   }
 
+  public BaccaratHand getPunto() {
+    return punto;
+  }
+
+  public BaccaratHand getBanco() {
+    return banco;
+  }
+
+  public Shoe getShoe() {
+    return shoe;
+  }
   private void firstHand() {
 
-    shoe.shuffle();
+    getShoe().shuffle();
 
     for (int i = 0; i < 2; i++) {
-      punto.cards.add(shoe.deal());
-      banco.cards.add(shoe.deal());
+      punto.cards.add(getShoe().deal());
+      banco.cards.add(getShoe().deal());
     }
   }
 
   private void addToHand(BaccaratHand currentHand) {
-    currentHand.cards.add(shoe.deal());
+    currentHand.cards.add(getShoe().deal());
   }
 
   private  void printResults() {
 
-    System.out.printf("Player: %s = %d\n", punto.cards.toString(), punto.value());
-    System.out.printf("Banker: %s = %d\n", banco.cards.toString(), banco.value());
+    System.out.printf("Player: %s = %d\n", getPunto().cards.toString(), getPunto().value());
+    System.out.printf("Banker: %s = %d\n", getBanco().cards.toString(), getBanco().value());
 
   }
 
   private int checkNatural() {
 
-    if(punto.isNatural()) {
+    if(getPunto().isNatural()) {
       System.out.println("Player has a Natural");
       System.out.println("Player win!");
       playerWins++;
       return 1;
-    } else if(banco.isNatural()) {
+    } else if(getBanco().isNatural()) {
       System.out.println("Banker has a Natural");
       System.out.println("Banker win!");
       bankerWins++;
       return 1;
-    } else if(punto.isNatural() && banco.isNatural()){
+    } else if(getPunto().isNatural() && getBanco().isNatural()){
       System.out.println("Tie");
       numTies++;
       return 1;
@@ -67,31 +78,31 @@ public class Baccarat {
 
   private void rules() {
 
-    if (punto.value() <= 5) {
+    if (getPunto().value() <= 5) {
 
-      addToHand(punto);
+      addToHand(getPunto());
       System.out.println("Dealing third card to player...");
 
-      if (banco.value() <= 2) {
-        addToHand(banco);
+      if (getPunto().value() <= 2) {
+        addToHand(getBanco());
         System.out.println("Dealing third card to banker...");
-      } else if (banco.value() == 3 && punto.cards.getLast().value() == 8) {
-        addToHand(banco);
+      } else if (getBanco().value() == 3 && getPunto().cards.getLast().value() == 8) {
+        addToHand(getBanco());
         System.out.println("Dealing third card to banker...");
-      } else if (banco.value() == 4 && punto.cards.getLast().value() == 2
-        || punto.cards.getLast().value() == 3 || punto.cards.getLast().value() == 4
-        || punto.cards.getLast().value() == 5 || punto.cards.getLast().value() == 6
-        || punto.cards.getLast().value() == 7) {
-        addToHand(banco);
+      } else if (getBanco().value() == 4 && getPunto().cards.getLast().value() == 2
+        || getPunto().cards.getLast().value() == 3 || getPunto().cards.getLast().value() == 4
+        || getPunto().cards.getLast().value() == 5 || getPunto().cards.getLast().value() == 6
+        || getPunto().cards.getLast().value() == 7) {
+        addToHand(getBanco());
         System.out.println("Dealing third card to banker...");
-      } else if (banco.value() == 5 && punto.cards.getLast().value() == 4
-        || punto.cards.getLast().value() == 5 || punto.cards.getLast().value() == 6
-        || punto.cards.getLast().value() == 7) {
-        addToHand(banco);
+      } else if (getBanco().value() == 5 && getPunto().cards.getLast().value() == 4
+        || getPunto().cards.getLast().value() == 5 || getPunto().cards.getLast().value() == 6
+        || getPunto().cards.getLast().value() == 7) {
+        addToHand(getBanco());
         System.out.println("Dealing third card to banker...");
-      } else if (banco.value() == 6 && punto.cards.getLast().value() == 6 ||
-        punto.cards.getLast().value() == 7) {
-        addToHand(banco);
+      } else if (getBanco().value() == 6 && getPunto().cards.getLast().value() == 6 ||
+        getPunto().cards.getLast().value() == 7) {
+        addToHand(getBanco());
         System.out.println("Dealing third card to banker...");
       }
       printResults();
@@ -126,13 +137,13 @@ public class Baccarat {
   }
 
   private void clearGame() {
-    punto.discard();
-    banco.discard();
+    getPunto().discard();
+    getBanco().discard();
   }
   private int checkWins() {
 
-    int puntoDifference = 9 - punto.value();
-    int bancoDifference = 9 - banco.value();
+    int puntoDifference = 9 - getPunto().value();
+    int bancoDifference = 9 - getBanco().value();
 
     if (puntoDifference == bancoDifference) {
       System.out.println("Tie");
@@ -169,6 +180,8 @@ public class Baccarat {
 
             if (userInput == 'n') {
               break;
+            } else {
+              System.err.println("Invalid character entered.");
             }
           }
         }
